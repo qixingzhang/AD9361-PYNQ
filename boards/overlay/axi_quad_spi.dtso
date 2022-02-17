@@ -1,0 +1,30 @@
+/dts-v1/;
+/plugin/;
+/ {
+    fragment@0 {
+        target = <&amba>;
+        overlay0: __overlay__ {                       
+            axi_quad_spi_0: axi_quad_spi@a0040000 {
+                bits-per-word = <8>;
+                clock-names = "ext_spi_clk", "s_axi_aclk";
+                clocks = <&zynqmp_clk 72>, <&zynqmp_clk 72>;
+                compatible = "xlnx,axi-quad-spi-3.2", "xlnx,xps-spi-2.00.a";
+                fifo-size = <16>;
+                num-cs = <0x1>;
+                reg = <0x0 0xa0040000 0x0 0x10000>;
+                xlnx,num-ss-bits = <0x1>;
+                xlnx,spi-mode = <0>;
+                status = "okay";
+                interrupt-parent = <&gic>;
+                interrupts = <0 104 4>;
+                #address-cells = <1>;
+                #size-cells = <0>;
+                spidev0: spidev@0 {
+                    compatible = "spidev";
+                    reg = <0>;
+                    spi-max-frequency = <10000000>;
+                };
+            };                
+        };
+    };
+};
