@@ -1,6 +1,15 @@
 from ctypes import *
 from pynq import Overlay
 
+class StructRfrssi(Structure):
+    _fields_ = [
+        ("ant", c_uint),
+        ("symbol", c_uint),
+        ("preamble", c_uint),
+        ("multiplier", c_int),
+        ("duration", c_ubyte)
+    ]
+
 class AD9361():
     def __init__(self):
         self.ol = Overlay('./overlay/axi_quad_spi.bit')
@@ -66,3 +75,18 @@ class AD9361():
     def set_rx_lo_int_ext(self, int_ext):
         self.lib._ad9361_get_en_state_machine_mode.argtypes = [c_ubyte]
         return self.lib._ad9361_set_rx_lo_int_ext(int_ext)
+    
+    def get_rx_rssi(self, ch):
+        func = self.lib._ad9361_get_rx_rssi
+        func.argtypes = [c_ubyte, POINTER(StructRfrssi)]
+        rssi = StructRfrssi()
+        ret = func(ch, byref(rssi))
+        return rssi
+        
+        
+        
+        
+        
+        
+        
+        
