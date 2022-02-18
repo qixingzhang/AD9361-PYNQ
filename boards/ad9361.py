@@ -1,7 +1,10 @@
 from ctypes import *
 from pynq import Overlay
 
-class StructRfrssi(Structure):
+SHORT128 = c_short * 128
+UINT6 = c_uint * 6
+
+class RFRssi(Structure):
     _fields_ = [
         ("ant", c_uint),
         ("symbol", c_uint),
@@ -9,6 +12,31 @@ class StructRfrssi(Structure):
         ("multiplier", c_int),
         ("duration", c_ubyte)
     ]
+    def print(self):
+        print("rssi.ant:", self.ant)
+        print("rssi.symbol:", self.symbol)
+        print("rssi.preamble:", self.preamble)
+        print("rssi.multiplier:", self.multiplier)
+        print("rssi.duration:", self.duration)
+        
+class RXFIRConfig(Structure):
+    _fields_ = [
+        ("rx", c_uint),
+        ("rx_gain", c_int),
+        ("rx_dec", c_uint),
+        ("rx_coef", SHORT128),
+        ("rx_coef_size", c_ubyte),
+        ("rx_path_clks", UINT6),
+        ("rx_bandwidth", c_uint)
+    ]
+    def print(self):
+        print("fir_config.rx:", self.rx)
+        print("fir_config.rx_gain:", self.rx_gain)
+        print("fir_config.rx_dec:", self.rx_dec)
+        print("fir_config.rx_coef:", type(self.rx_coef))
+        print("fir_config.rx_coef_size:", self.rx_coef_size)
+        print("fir_config.rx_path_clks:", type(self.rx_path_clks))
+        print("fir_config.rx_bandwidth:", self.rx_bandwidth)
 
 class AD9361():
     def __init__(self):
@@ -78,15 +106,110 @@ class AD9361():
     
     def get_rx_rssi(self, ch):
         func = self.lib._ad9361_get_rx_rssi
-        func.argtypes = [c_ubyte, POINTER(StructRfrssi)]
-        rssi = StructRfrssi()
+        func.argtypes = [c_ubyte, POINTER(RFRssi)]
+        rssi = RFRssi()
         ret = func(ch, byref(rssi))
         return rssi
+    
+    def set_rx_gain_control_mode(self, ch, gc_mode):
+        func = self.lib._ad9361_set_rx_gain_control_mode
+        func.argtypes = [c_ubyte, c_ubyte]
+        return func(ch, gc_mode)
+    
+    def get_rx_gain_control_mode(self, ch):
+        func = self.lib._ad9361_get_rx_gain_control_mode
+        func.argtypes = [c_ubyte, POINTER(c_ubyte)]
+        mode = c_ubyte(0)
+        ret = func(ch, mode)
+        return mode.value
+    
+    def set_rx_fir_config(self, fir_config):
+        func = self.lib._ad9361_set_rx_fir_config
+        func.argtypes = [RXFIRConfig]
+        return func(fir_config)
+    
+    def get_rx_fir_config(self, ch):
+        func = self.lib._ad9361_get_rx_fir_config
+        func.argtypes = [c_ubyte, POINTER(RXFIRConfig)]
+        fir_config = RXFIRConfig()
+        ret = func(ch, byref(fir_config))
+        return fir_config
         
+    def set_tx_fir_en_dis(self, en_dis):
+        func = self.lib._ad9361_set_tx_fir_en_dis
+        func.argtypes = [c_ubyte]
+        return func(en_dis)
+    
+    def get_tx_fir_en_dis(self):
+        func = self.lib._ad9361_get_tx_fir_en_dis
+        func.argtypes = [POINTER(c_ubyte)]
+        en_dis = c_ubyte(0)
+        ret = func(en_dis)
+        return en_dis.value
         
+    def get_tx_rssi(self, ch):
+        func = self.lib._ad9361_get_tx_rssi
+        func.argtypes = [c_ubyte, POINTER(c_uint)]
+        rssi_db_x_1000 = c_uint(0)
+        ret = func(ch, rssi_db_x_1000)
+        return rssi_db_x_1000.value
         
-        
-        
-        
-        
+    def set_tx_rf_port_output(self, mode):
+        func = self.lib._ad9361_set_tx_rf_port_output
+        func.argtypes = [c_uint]
+        return func(mode)
+    
+    def get_tx_rf_port_output(self):
+        func = self.lib._ad9361_get_tx_rf_port_output
+        func.argtypes = [POINTER(c_uint)]
+        mode = c_uint(0)
+        ret = func(mode)
+        return mode.value
+    
+    def set_tx_auto_cal_en_dis(self, en_dis):
+        func = self.lib._ad9361_set_tx_auto_cal_en_dis
+        func.argtypes = [c_ubyte]
+        return func(en_dis)
+    
+    def get_tx_auto_cal_en_dis(self):
+        func = self.lib._ad9361_get_tx_auto_cal_en_dis
+        func.argtypes = [POINTER(c_ubyte)]
+        en_dis = c_ubyte(0)
+        ret = func(en_dis)
+        return en_dis.value
+    
+    def tx_fastlock_store(self, profile):
+        func = self.lib._ad9361_tx_fastlock_store
+        func.argtypes = [c_uint]
+        return func(profile)
+
+    def tx_fastlock_recall(self, profile):
+        func = self.lib._ad9361_tx_fastlock_recall
+        func.argtypes = [c_uint]
+        return func(profile)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
         
