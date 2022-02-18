@@ -3,6 +3,7 @@ from pynq import Overlay
 
 SHORT128 = c_short * 128
 UINT6 = c_uint * 6
+ProfileValues = c_ubyte * 16
 
 class RFRssi(Structure):
     _fields_ = [
@@ -188,28 +189,31 @@ class AD9361():
         func.argtypes = [c_uint]
         return func(profile)
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    def rx_fastlock_load(self, profile, values):
+        func = self.lib._ad9361_rx_fastlock_load
+        func.argtypes = [c_uint, POINTER(ProfileValues)]
+        c_values = ProfileValues()
+        for i in range(16):
+            c_values[i] = values[i]
+        return func(profile, byref(c_values))
         
+    def rx_fastlock_save(self, profile):
+        func = self.lib._ad9361_rx_fastlock_save
+        func.argtypes = [c_uint, POINTER(ProfileValues)]
+        c_values = ProfileValues()
+        ret = func(profile, byref(c_values))
+        values = list(c_values)
+        return values
+    
+    def set_rx_lo_powerdown(self, pd):
+        func = self.lib._ad9361_set_rx_lo_powerdown
+        func.argtypes = [c_ubyte]
+        return func(pd)
+    
+    def get_rx_lo_powerdown(self):
+        func = self.lib._ad9361_get_rx_lo_powerdown
+        func.argtypes = [POINTER(c_ubyte)]
+        pd = c_ubyte(0)
+        ret = func(pd)
+        return pd.value 
+    
