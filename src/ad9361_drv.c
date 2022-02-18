@@ -201,7 +201,23 @@ int32_t _ad9361_tx_fastlock_recall(uint32_t profile) {
 	return ad9361_tx_fastlock_recall(ad9361_phy, profile);
 }
 
+/* Load RX fastlock profile. */
+int32_t _ad9361_rx_fastlock_load(uint32_t profile, uint8_t *values) {
+	return ad9361_rx_fastlock_load(ad9361_phy, profile, values);
+}
 
+/* Save RX fastlock profile. */
+int32_t _ad9361_rx_fastlock_save(uint32_t profile, uint8_t *values) {
+	return ad9361_rx_fastlock_save(ad9361_phy, profile, values);
+}
 
+/* Set power down TX LO/Synthesizers */
+int32_t _ad9361_set_rx_lo_powerdown(uint8_t pd) {
+	return ad9361_set_rx_lo_powerdown(ad9361_phy, pd);
+}
 
+/* Get power down TX LO/Synthesizers */
+int32_t _ad9361_get_rx_lo_powerdown(uint8_t *pd) {
+	return ad9361_get_rx_lo_powerdown(ad9361_phy, pd);
+}
 
