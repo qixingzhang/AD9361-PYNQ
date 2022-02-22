@@ -156,6 +156,142 @@ int32_t _ad9361_get_rx_fir_config(uint8_t rx_ch, AD9361_RXFIRConfig *fir_cfg) {
 	return ad9361_get_rx_fir_config(ad9361_phy, rx_ch, fir_cfg);
 }
 
+/* Enable/disable the RX FIR filter. */
+int32_t _ad9361_set_rx_fir_en_dis (uint8_t en_dis) {
+	return ad9361_set_rx_fir_en_dis (ad9361_phy, en_dis);
+}
+
+/* Get the status of the RX FIR filter. */
+int32_t _ad9361_get_rx_fir_en_dis (uint8_t *en_dis) {
+	return ad9361_get_rx_fir_en_dis (ad9361_phy, en_dis);
+}
+
+
+/* Enable/disable the RX RFDC Tracking. */
+int32_t _ad9361_set_rx_rfdc_track_en_dis (uint8_t en_dis) {
+	return ad9361_set_rx_rfdc_track_en_dis (ad9361_phy, en_dis);
+}
+
+/* Get the status of the RX RFDC Tracking. */
+int32_t _ad9361_get_rx_rfdc_track_en_dis (uint8_t *en_dis) {
+	return ad9361_get_rx_rfdc_track_en_dis (ad9361_phy, en_dis);
+}
+
+/* Enable/disable the RX BasebandDC Tracking. */
+int32_t _ad9361_set_rx_bbdc_track_en_dis (uint8_t en_dis) {
+	return ad9361_set_rx_bbdc_track_en_dis (ad9361_phy, en_dis);
+}
+
+/* Get the status of the RX BasebandDC Tracking. */
+int32_t _ad9361_get_rx_bbdc_track_en_dis (uint8_t *en_dis) {
+	return ad9361_get_rx_bbdc_track_en_dis (ad9361_phy, en_dis);
+}
+
+/* Enable/disable the RX Quadrature Tracking. */
+int32_t _ad9361_set_rx_quad_track_en_dis (uint8_t en_dis) {
+	return ad9361_set_rx_quad_track_en_dis (ad9361_phy, en_dis);
+}
+
+/* Get the status of the RX Quadrature Tracking. */
+int32_t _ad9361_get_rx_quad_track_en_dis (uint8_t *en_dis) {
+	return ad9361_get_rx_quad_track_en_dis (ad9361_phy, en_dis);
+}
+
+/* Set the RX RF input port. */
+int32_t _ad9361_set_rx_rf_port_input (uint32_t mode) {
+	return ad9361_set_rx_rf_port_input (ad9361_phy, mode);
+}
+
+/* Get the selected RX RF input port. */
+int32_t _ad9361_get_rx_rf_port_input (uint32_t *mode) {
+	return ad9361_get_rx_rf_port_input (ad9361_phy, mode);
+}
+
+/* Store RX fastlock profile. */
+int32_t _ad9361_rx_fastlock_store(uint32_t profile) {
+	return ad9361_rx_fastlock_store(ad9361_phy, profile);
+}
+
+/* Recall RX fastlock profile. */
+int32_t _ad9361_rx_fastlock_recall(uint32_t profile) {
+	return ad9361_rx_fastlock_recall(ad9361_phy, profile);
+}
+
+/* Load RX fastlock profile. */
+int32_t _ad9361_rx_fastlock_load(uint32_t profile, uint8_t *values) {
+	return ad9361_rx_fastlock_load(ad9361_phy, profile, values);
+}
+
+/* Save RX fastlock profile. */
+int32_t _ad9361_rx_fastlock_save(uint32_t profile, uint8_t *values) {
+	return ad9361_rx_fastlock_save(ad9361_phy, profile, values);
+}
+
+/* Set power down TX LO/Synthesizers */
+int32_t _ad9361_set_rx_lo_powerdown(uint8_t pd) {
+	return ad9361_set_rx_lo_powerdown(ad9361_phy, pd);
+}
+
+/* Get power down TX LO/Synthesizers */
+int32_t _ad9361_get_rx_lo_powerdown(uint8_t *pd) {
+	return ad9361_get_rx_lo_powerdown(ad9361_phy, pd);
+}
+
+/* Set the transmit attenuation for the selected channel. */
+int32_t _ad9361_set_tx_attenuation (uint8_t ch, uint32_t attenuation_mdb) {
+	return ad9361_set_tx_attenuation (ad9361_phy, ch, attenuation_mdb);
+}
+
+/* Get current transmit attenuation for the selected channel. */
+int32_t _ad9361_get_tx_attenuation (uint8_t ch, uint32_t *attenuation_mdb) {
+	return ad9361_get_tx_attenuation (ad9361_phy, ch, attenuation_mdb);
+}
+
+/* Set the TX RF bandwidth. */
+int32_t _ad9361_set_tx_rf_bandwidth(uint32_t bandwidth_hz) {
+	return ad9361_set_tx_rf_bandwidth(ad9361_phy, bandwidth_hz);
+}
+
+/* Get the TX RF bandwidth. */
+int32_t _ad9361_get_tx_rf_bandwidth (uint32_t *bandwidth_hz) {
+	return ad9361_get_tx_rf_bandwidth (ad9361_phy, bandwidth_hz);
+}
+
+/* Set the TX sampling frequency. */
+int32_t _ad9361_set_tx_sampling_freq (uint32_t sampling_freq_hz) {
+	return ad9361_set_tx_sampling_freq (ad9361_phy, sampling_freq_hz);
+}
+
+/* Get current TX sampling frequency. */
+int32_t _ad9361_get_tx_sampling_freq (uint32_t *sampling_freq_hz) {
+	return ad9361_get_tx_sampling_freq (ad9361_phy, sampling_freq_hz);
+}
+
+/* Set the TX LO frequency. */
+int32_t _ad9361_set_tx_lo_freq (uint64_t lo_freq_hz) {
+	return ad9361_set_tx_lo_freq (ad9361_phy, lo_freq_hz);
+}
+
+/* Get current TX LO frequency. */
+int32_t _ad9361_get_tx_lo_freq (uint64_t *lo_freq_hz) {
+	return ad9361_get_tx_lo_freq (ad9361_phy, lo_freq_hz);
+}
+
+/* Switch between internal and external LO. */
+int32_t _ad9361_set_tx_lo_int_ext(uint8_t int_ext) {
+	return ad9361_set_tx_lo_int_ext(ad9361_phy, int_ext);
+}
+
+/* Set the TX FIR filter configuration. */
+int32_t _ad9361_set_tx_fir_config(AD9361_TXFIRConfig fir_cfg) {
+	return ad9361_set_tx_fir_config(ad9361_phy, fir_cfg);
+}
+
+/* Get the TX FIR filter configuration. */
+int32_t _ad9361_get_tx_fir_config(uint8_t rx_ch, AD9361_TXFIRConfig *fir_cfg) {
+	return ad9361_get_tx_fir_config(ad9361_phy, rx_ch, fir_cfg);
+}
+
 /* Enable/disable the TX FIR filter. */
 int32_t _ad9361_set_tx_fir_en_dis (uint8_t en_dis) {
 	return ad9361_set_tx_fir_en_dis (ad9361_phy, en_dis);
@@ -202,22 +338,87 @@ int32_t _ad9361_tx_fastlock_recall(uint32_t profile) {
 }
 
 /* Load RX fastlock profile. */
-int32_t _ad9361_rx_fastlock_load(uint32_t profile, uint8_t *values) {
-	return ad9361_rx_fastlock_load(ad9361_phy, profile, values);
+int32_t _ad9361_tx_fastlock_load(uint32_t profile, uint8_t *values) {
+	return ad9361_tx_fastlock_load(ad9361_phy, profile, values);
 }
 
 /* Save RX fastlock profile. */
-int32_t _ad9361_rx_fastlock_save(uint32_t profile, uint8_t *values) {
-	return ad9361_rx_fastlock_save(ad9361_phy, profile, values);
+int32_t _ad9361_tx_fastlock_save(uint32_t profile, uint8_t *values) {
+	return ad9361_tx_fastlock_save(ad9361_phy, profile, values);
 }
 
 /* Set power down TX LO/Synthesizers */
-int32_t _ad9361_set_rx_lo_powerdown(uint8_t pd) {
-	return ad9361_set_rx_lo_powerdown(ad9361_phy, pd);
+int32_t _ad9361_set_tx_lo_powerdown(uint8_t pd) {
+	return ad9361_set_tx_lo_powerdown(ad9361_phy, pd);
 }
 
 /* Get power down TX LO/Synthesizers */
-int32_t _ad9361_get_rx_lo_powerdown(uint8_t *pd) {
-	return ad9361_get_rx_lo_powerdown(ad9361_phy, pd);
+int32_t _ad9361_get_tx_lo_powerdown(uint8_t *pd) {
+	return ad9361_get_tx_lo_powerdown(ad9361_phy, pd);
 }
+
+/*******************************************************************************/
+/* Set the RX and TX path rates. */
+int32_t _ad9361_set_trx_path_clks(uint32_t *rx_path_clks, uint32_t *tx_path_clks) {
+	return ad9361_set_trx_path_clks(ad9361_phy, rx_path_clks, tx_path_clks);
+}
+
+/* Get the RX and TX path rates. */
+int32_t _ad9361_get_trx_path_clks(uint32_t *rx_path_clks, uint32_t *tx_path_clks) {
+	return ad9361_get_trx_path_clks(ad9361_phy, rx_path_clks, tx_path_clks);
+}
+
+/* Power Down RX/TX LO/Synthesizers */
+int32_t _ad9361_set_trx_lo_powerdown(uint8_t pd_rx, uint8_t pd_tx) {
+	return ad9361_set_trx_lo_powerdown(ad9361_phy, pd_rx, pd_tx);
+}
+
+/* Set the number of channels mode. */
+int32_t _ad9361_set_no_ch_mode(uint8_t no_ch_mode) {
+	return ad9361_set_no_ch_mode(ad9361_phy, no_ch_mode);
+}
+
+/* Do multi chip synchronization. */
+// int32_t ad9361_do_mcs(struct ad9361_rf_phy *phy_master, struct ad9361_rf_phy *phy_slave);
+
+/* Enable/disable the TRX FIR filters. */
+int32_t _ad9361_set_trx_fir_en_dis (uint8_t en_dis) {
+	return ad9361_set_trx_fir_en_dis (ad9361_phy, en_dis);
+}
+
+/* Set the OSR rate governor. */
+int32_t _ad9361_set_trx_rate_gov (uint32_t rate_gov) {
+	return ad9361_set_trx_rate_gov (ad9361_phy, rate_gov);
+}
+
+/* Get the OSR rate governor. */
+int32_t _ad9361_get_trx_rate_gov (uint32_t *rate_gov) {
+	return ad9361_get_trx_rate_gov (ad9361_phy, rate_gov);
+}
+
+/* Perform the selected calibration. */
+int32_t _ad9361_do_calib(uint32_t cal, int32_t arg) {
+	return ad9361_do_calib(ad9361_phy, cal, arg);
+}
+
+/* Load and enable TRX FIR filters configurations. */
+int32_t _ad9361_trx_load_enable_fir(AD9361_RXFIRConfig rx_fir_cfg, AD9361_TXFIRConfig tx_fir_cfg) {
+	return ad9361_trx_load_enable_fir(ad9361_phy, rx_fir_cfg, tx_fir_cfg);
+}
+
+/* Do DCXO coarse tuning. */
+int32_t _ad9361_do_dcxo_tune_coarse(uint32_t coarse) {
+	return ad9361_do_dcxo_tune_coarse(ad9361_phy, coarse);
+}
+
+/* Do DCXO fine tuning. */
+int32_t _ad9361_do_dcxo_tune_fine(uint32_t fine) {
+	return ad9361_do_dcxo_tune_fine(ad9361_phy, fine);
+}
+
+/* Get the measured temperature of the device. */
+int32_t _ad9361_get_temp() {
+	return ad9361_get_temp(ad9361_phy);
+}
+
 
