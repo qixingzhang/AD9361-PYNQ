@@ -61,7 +61,6 @@ class TXFIRConfig(Structure):
 
 class AD9361():
     def __init__(self):
-        self.ol = Overlay('./overlay/axi_quad_spi.bit')
         self.lib = cdll.LoadLibrary("./lib/libad9361_drv.so")
         self.spifd = self.lib.open_spi()
         assert self.spifd > 0, 'spi open error'
