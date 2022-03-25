@@ -60,11 +60,18 @@ class TXFIRConfig(Structure):
         print("fir_config.tx_bandwidth:", self.tx_bandwidth)
 
 class AD9361():
-    def __init__(self):
+    def __init__(self, en_1x1_mode=0, rx_num=0, tx_num=0):
         self.lib = cdll.LoadLibrary("./lib/libad9361_drv.so")
         self.spifd = self.lib.open_spi()
         assert self.spifd > 0, 'spi open error'
-        assert self.lib.init_ad9361(self.spifd) == 0, 'ad9361 initialization failed'
+        init1x1_func = self.lib.init_ad9361_1rx1tx
+        init1x1_func.argtypes = [c_int, c_ubyte, c_ubyte]
+        init2x2_func = self.lib.init_ad9361
+        init2x2_func.argtypes = [c_int]
+        if en_1x1_mode:
+            assert init1x1_func(self.spifd, rx_num, tx_num) == 0, 'ad9361 initialization failed'
+        else:
+            assert init2x2_func(self.spifd) == 0, 'ad9361 initialization failed'
         print('ad9361 successfully initialized')
         ret = self.lib.config_ad9361()
         assert ret > 0, 'ad9361 config failed'
