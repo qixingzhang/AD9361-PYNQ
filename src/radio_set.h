@@ -13,8 +13,8 @@
 static AD9361_InitParam default_init_param = {
 	/* Device selection */
 	ID_AD9361,	// dev_sel
-/* Identification number */
-0,		//id_no;
+	/* Identification number */
+	0,		//id_no;
 	/* Reference Clock */
 	40000000UL,	//reference_clk_rate
 	/* Base Configuration */
@@ -237,7 +237,7 @@ static AD9361_InitParam default_init_param = {
 	48, 		//tx2_mon_lo_cm *** adi,txmon-2-lo-cm
 	/* GPIO definitions */
 	0
-	};
+};
 AD9361_RXFIRConfig rx_fir_config_4_128 = { 3, // rx;
 		-6, // rx_gain;
 		4, // rx_dec;

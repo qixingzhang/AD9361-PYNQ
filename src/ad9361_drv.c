@@ -67,6 +67,23 @@ int init_ad9361(int spifd) {
 	return 0;
 }
 
+int init_ad9361_1rx1tx(int spifd, uint8_t rx_num, uint8_t tx_num) {
+	printf("init ad9361 with 1x1 mode\n");
+	default_init_param.two_rx_two_tx_mode_enable = 0;
+	default_init_param.one_rx_one_tx_mode_use_rx_num = rx_num;
+	default_init_param.one_rx_one_tx_mode_use_tx_num = tx_num;
+	default_init_param.gpio_resetb = RF1_RESETB;
+	default_init_param.gpio_sync = -1;
+	default_init_param.gpio_cal_sw1 = -1;
+	default_init_param.gpio_cal_sw2 = -1;
+	default_init_param.spifd = spifd;
+	if (ad9361_init(&ad9361_phy, &default_init_param) != 0) {
+		printf("init ad9361 failed\n");
+		return -1;
+	}
+	return 0;
+}
+
 int config_ad9361() {
 	printf("config ad9361\n");
 	ad9361_spi_write(ad9361_phy->spi, REG_TX_CLOCK_DATA_DELAY, 0x40);

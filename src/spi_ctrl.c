@@ -54,7 +54,7 @@ int32_t cdcm6208_init(struct spi_device *spi) {
 	int ret;
 	int i;
 	int32_t val = cdcm6208_spi_read(spi, 40);
-	printf("cdcm6208_reg[40]=%lx\n", val);
+	printf("cdcm6208_reg[40]=%x\n", val);
 	for (i = 0; i < ARRAY_SIZE(cdcm6208_init_data); i++) {
 		ret = spi_write32(spi, cdcm6208_init_data[i]);
 	}

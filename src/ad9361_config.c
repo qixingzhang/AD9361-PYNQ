@@ -44,9 +44,9 @@ int32_t ad9361_set_sample(struct ad9361_rf_phy *ad9361_phy,
 	}
 	ad9361_set_tx_fir_config(ad9361_phy, tx_fir_config);
 	ad9361_set_rx_fir_config(ad9361_phy, rx_fir_config);
-	printf("tx_fir_config:coef_size=%d,int=%ld\n", tx_fir_config.tx_coef_size,
+	printf("tx_fir_config:coef_size=%d,int=%d\n", tx_fir_config.tx_coef_size,
 			tx_fir_config.tx_int);
-	printf("rx_fir_config:coef_size=%d,dec=%ld\n", rx_fir_config.rx_coef_size,
+	printf("rx_fir_config:coef_size=%d,dec=%d\n", rx_fir_config.rx_coef_size,
 			rx_fir_config.rx_dec);
 	if (*sample_freq >= 25000000 / 12)
 		ad9361_set_tx_sampling_freq(ad9361_phy, *sample_freq);
@@ -56,7 +56,7 @@ int32_t ad9361_set_sample(struct ad9361_rf_phy *ad9361_phy,
 	if (*sample_freq < 25000000 / 12)
 		ad9361_set_tx_sampling_freq(ad9361_phy, *sample_freq);
 	ad9361_get_tx_sampling_freq(ad9361_phy, sample_freq);
-	printf("sample_freq=%ldHz\n", *sample_freq);
+	printf("sample_freq=%dHz\n", *sample_freq);
 	return 0;
 }
 int32_t ad9361_config(struct ad9361_rf_phy *ad9361_phy) {
